@@ -10,8 +10,7 @@
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
@@ -35,6 +34,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
             <db:parameterized-query><![CDATA[SELECT * FROM FLIGHTS]]></db:parameterized-query>
         </db:select>
         <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Content-Type"/>
         <jms:outbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="JMS"/>
     </flow>
     <flow name="logFlights">
